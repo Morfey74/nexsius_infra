@@ -1,5 +1,4 @@
 # nexsius_infra
-nexsius Infra repository
 
 Подключение к bastion:
 ```console
@@ -24,9 +23,22 @@ Host someinternalhost
     ProxyCommand ssh -W %h:%p bastion
 </pre>
 
+Startup script для GCP - startup.sh:
+gcloud compute instances create reddit-app\
+ --metadata-from-file startup-script=startup.sh \
+ --boot-disk-size=10GB \
+ --image-family ubuntu-1604-lts \
+ --image-project=ubuntu-os-cloud \
+ --machine-type=g1-small \
+ --tags puma-server \
+ --restart-on-failure
+
+
 ```conf
 bastion_IP = 35.195.225.176
 someinternalhost_IP = 10.132.0.4
 ```
 
 
+gcloud compute firewall-rules delete default-puma-server
+gcloud compute firewall-rules delete default-puma-server
