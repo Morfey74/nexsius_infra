@@ -24,6 +24,7 @@ Host someinternalhost
 </pre>
 
 Startup script для GCP - startup.sh:
+```
 gcloud compute instances create reddit-app\
  --metadata-from-file startup-script=startup.sh \
  --boot-disk-size=10GB \
@@ -32,13 +33,20 @@ gcloud compute instances create reddit-app\
  --machine-type=g1-small \
  --tags puma-server \
  --restart-on-failure
+```
 
+Удаление и создание правил:
+```
+gcloud compute firewall-rules delete default-puma-server
+gcloud compute firewall-rules create default-puma-server1 --target-tags='puma-server' --allow=tcp:9292
+```
 
 ```conf
 bastion_IP = 35.195.225.176
 someinternalhost_IP = 10.132.0.4
+testapp_IP = 35.228.246.143
+testapp_port = 9292
 ```
 
 
-gcloud compute firewall-rules delete default-puma-server
-gcloud compute firewall-rules delete default-puma-server
+
