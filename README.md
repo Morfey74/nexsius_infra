@@ -44,7 +44,7 @@ gcloud compute firewall-rules create default-puma-server1 --target-tags='puma-se
 ```conf
 bastion_IP = 35.195.225.176
 someinternalhost_IP = 10.132.0.4
-testapp_IP = 35.228.246.143
+testapp_IP = 35.228.63.139
 testapp_port = 9292
 ```
 
