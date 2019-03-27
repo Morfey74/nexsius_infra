@@ -1,0 +1,17 @@
+[Unit]
+Description="Puma server for otus HW"
+After=mongod.service network.target
+Requires=mongod.service
+
+[Service]
+Type=simple
+
+User=nexs
+Group=nexs
+
+ExecStart=/usr/bin/puma
+ExecStop=/bin/kill -15 $MAINPID
+WorkingDirectory=/opt/reddit
+
+[Install]
+WantedBy=multi-user.target

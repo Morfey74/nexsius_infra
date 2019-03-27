@@ -1,45 +1,32 @@
 # nexsius_infra
 
-Подключение к bastion:
-```console
-ssh -i ~/.ssh/id_rsa nexs@35.205.160.30
+
+## Сделано:
+1. Создан шаблон ubuntu16.json.
+2. Созданы шаблоны пользовательских переменных variables.json (добавлен в gitignore) и variable.json.example (содержит случайные данные).
+3. Создан шаблон immutable.json (часть переменных в variables.json). Добавлен файл описания устанавливаемого сервиса puma-server.service.
+4. Все шаблоны проверены командой:
+
 ```
-
-Подключение к someinternalhost одной командой (сквозное подключение):
-```console
-ssh -t -i ~/.ssh/id_rsa -A  nexs@35.205.160.30 ssh 10.132.0.3
+packer validate -var-file variables.json <имя шаблона>
 ```
-либо внести в ~/.ssh/config следующие настройки:
+5. Созданы образ ВМ на базе ранее созданного шаблона:
 
-<pre>
-Host bastion
-    Hostname 35.195.225.176
-    User nexs
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-Host someinternalhost
-    Hostname 10.132.0.4
-    User nexs
-    ProxyCommand ssh -W %h:%p bastion
-</pre>
+```
+packer build -var-file variables.json immutable.json
+```
+6. Добавлен скрипт create-reddit-vm.sh для создания ВМ с использованием команды gcloud:
 
-Startup script для GCP - startup.sh:
 ```
 gcloud compute instances create reddit-app\
- --metadata-from-file startup-script=startup.sh \
- --boot-disk-size=10GB \
- --image-family ubuntu-1604-lts \
- --image-project=ubuntu-os-cloud \
- --machine-type=g1-small \
- --tags puma-server \
- --restart-on-failure
+  --image-family reddit-full \
+  --tags puma-server \
+  --zone=europe-west1-d \
+  --restart-on-failure
 ```
 
-Удаление и создание правил:
-```
-gcloud compute firewall-rules delete default-puma-server
-gcloud compute firewall-rules create default-puma-server1 --target-tags='puma-server' --allow=tcp:9292
-```
+7. Проверено на работоспособность посредством запуска create-reddit-vm.sh.
+
 
 ```conf
 bastion_IP = 35.195.225.176
