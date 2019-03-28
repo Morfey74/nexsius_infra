@@ -8,7 +8,7 @@
         {
             "type": "googlecompute",
             "project_id": "{{user `project_id`}}",
-            "image_name": "reddit-full-{{timestamp}}",
+            "image_name": "reddit-full",
             "image_family": "reddit-full",
             "source_image_family": "ubuntu-1604-lts",
             "disk_size" : 10,
@@ -16,7 +16,7 @@
             "image_description" : "image for reddit-app otus",
             "network_project_id" : "reddit app network",
             "zone": "europe-west1-b",
-            "ssh_username": "appuser",
+            "ssh_username": "nexs",
             "machine_type": "{{user `machine_type`}}",
             "tags": ["puma-server"]
         }
