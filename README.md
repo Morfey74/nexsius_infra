@@ -1,4 +1,4 @@
-# nexsius_infra
+# nexsius_infra [![Build Status](https://travis-ci.com/otus-devops-2019-02/nexsius_infra.svg?branch=terraform-1)](https://travis-ci.com/otus-devops-2019-02/nexsius_infra)
 
 
 ## Сделано:
