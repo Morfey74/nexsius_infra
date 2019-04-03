@@ -24,3 +24,8 @@ variable private_key_path {
   description = "Path to private key"
 }
 
+variable appuser1_pub_key {
+  description = "Path to appuser1 pub key"
+}
+
+
