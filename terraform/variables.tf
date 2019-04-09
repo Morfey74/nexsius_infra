@@ -23,4 +23,7 @@ variable disk_image {
 variable private_key_path {
   description = "Path to private key"
 }
-
+variable reddit_count {
+  type = "string"
+  default = "1"
+}
