@@ -22,7 +22,6 @@ resource "google_compute_instance" "app" {
 
   metadata {
     ssh-keys = "appuser:${file(var.public_key_path)}"
-    ssh-keys = "appuser1:${file(var.appuser1_pub_key)}"
   }
 
   network_interface {
