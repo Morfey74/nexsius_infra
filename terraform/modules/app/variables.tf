@@ -12,3 +12,5 @@ variable app_disk_image {
   default = "reddit-app-base"
 }
 
+variable db_internal_ip {}
+
