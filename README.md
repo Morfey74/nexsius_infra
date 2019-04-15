@@ -1,4 +1,13 @@
-# nexsius_infra [![Build Status](https://travis-ci.com/otus-devops-2019-02/nexsius_infra.svg?branch=terraform-1)](https://travis-ci.com/otus-devops-2019-02/nexsius_infra)
+# nexsius_infra [![Build Status](https://travis-ci.com/otus-devops-2019-02/nexsius_infra.svg?branch=terraform-2)](https://travis-ci.com/otus-devops-2019-02/nexsius_infra)
+
+#HW 9
+## Сделано:
+
+0. Пересмотрена лекция и прочитано про хранение state в удаленных ресурсах. 
+1. Выполнены задачи по ДЗ: настроено правило для ssh, созданы packer`ом образы для ВМ СУБД и приложения, созданы модули app, db, vpc, созданы отдельные конфигурации под stage и prod, проведено тестирование окружений stage и prod при работе с модулями 
+2. Созданы тестовые bucket`ы, проверена работа с переносом state-файла. В окружениях stage и prod созданы backend'ы - сами state файлы перенесены в bucket GCP.
+3. Добавлены provisioner`ы для деплоя с учетом размещения скриптов деплоя в папке модуля.
+4. Реализована передача внешнего IP СУБД в переменную окружения DATABASE_URL (через puma.service >> Environment="DATABASE_URL=${db_internal_ip}").
 
 
 ## HW 8 (terraform-1)

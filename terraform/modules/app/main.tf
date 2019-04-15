@@ -2,22 +2,15 @@ terraform {
   required_version = ">=0.11,<0.12"
 }
 
-provider "google" {
-  version = "2.0.0"
-  project = "${var.project}"
-  region  = "${var.region}"
-}
-
 resource "google_compute_instance" "app" {
-  count = "${var.reddit_count}"
-  name         = "reddit-app-${count.index}"
+  name         = "reddit-app"
   machine_type = "g1-small"
   zone         = "${var.zone}"
   tags         = ["reddit-app"]
 
   boot_disk {
     initialize_params {
-      image = "${var.disk_image}"
+      image = "${var.app_disk_image}"
     }
   }
 
@@ -27,9 +20,11 @@ resource "google_compute_instance" "app" {
 
   network_interface {
     network       = "default"
-    access_config = {}
+    access_config = {
+		nat_ip = "${google_compute_address.app_ip.address}"
+	}
   }
-
+  
   connection {
     type        = "ssh"
     user        = "appuser"
@@ -44,6 +39,13 @@ resource "google_compute_instance" "app" {
 
   provisioner "remote-exec" {
     script = "files/deploy.sh"
+  }
+   provisioner "remote-exec" {
+    inline = [
+      "sudo sed -i 's/#Environment=DATABASE_URL=VALUE/Environment=DATABASE_URL=${var.db_internal_ip}/;' /etc/systemd/system/puma.service",
+      "sudo systemctl daemon-reload",
+      "sudo systemctl restart puma.service",
+    ]
   }
 }
 
@@ -60,8 +62,6 @@ resource "google_compute_firewall" "firewall_puma" {
   target_tags   = ["reddit-app"]
 }
 
-resource "google_compute_project_metadata" "ssh_keys" {
-  metadata {
-    ssh-keys = "appuser1:${file(var.public_key_path)}\nappuser2:${file(var.public_key_path)}"
-  }
+resource "google_compute_address" "app_ip" {
+  name = "reddit-app-ip"
 }
