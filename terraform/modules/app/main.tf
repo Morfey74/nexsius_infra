@@ -33,18 +33,18 @@ resource "google_compute_instance" "app" {
   }
 
   provisioner "file" {
-    source      = "files/puma-server.service"
+    source      = "../files/puma-server.service"
     destination = "/tmp/puma-server.service"
   }
 
   provisioner "remote-exec" {
-    script = "files/deploy.sh"
+    script = "../files/deploy.sh"
   }
    provisioner "remote-exec" {
     inline = [
-      "sudo sed -i 's/#Environment=DATABASE_URL=VALUE/Environment=DATABASE_URL=${var.db_internal_ip}/;' /etc/systemd/system/puma.service",
+      "sudo sed -i 's/#Environment=DATABASE_URL=VALUE/Environment=DATABASE_URL=${var.db_internal_ip}/;' /etc/systemd/system/puma-server.service",
       "sudo systemctl daemon-reload",
-      "sudo systemctl restart puma.service",
+      "sudo systemctl restart puma-server.service",
     ]
   }
 }

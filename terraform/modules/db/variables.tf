@@ -11,6 +11,5 @@ variable private_key_path {}
 
 variable db_disk_image {
   description = "Disk image reddit db"
-  default = "reddit-db-base"
+  default     = "reddit-db-base"
 }
-
