@@ -1,0 +1,10 @@
+app:
+  hosts:
+    appserver:
+       ansible_host: nexs.me
+
+db:
+  hosts:
+    dbserver:
+      ansible_host: nexs.me
+    
