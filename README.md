@@ -1,18 +1,9 @@
-# nexsius_infra [![Build Status](https://travis-ci.com/otus-devops-2019-02/nexsius_infra.svg?branch=terraform-2)](https://travis-ci.com/otus-devops-2019-02/nexsius_infra)
+# nexsius_infra [![Build Status](https://travis-ci.com/otus-devops-2019-02/nexsius_infra.svg?branch=ansible-2)](https://travis-ci.com/otus-devops-2019-02/nexsius_infra)
 
-#HW 10
+#HW 11
 ## Сделано:
-
-* Установлен ansible
-* созданы:
-  * конфигурационый файл
-  * inventory хостов в 3 форматах
-  * в inventory созданы группы хостов
-  * создан playbook для клонирования приложения
-  * написан скрипт динамического inventory, который с помощью gcloud получает IP-адреса хостов и выводит в формате json
-  * Если я правильно понимаю отличия от статического, в динамическом inventory описываются раздельно группы хостов и значения их переменных 
-
-## Дополнительный вопрос
-
-При удалении на хосте директории склонированного приложения и повторном запуске playbook, директория восстанавливается, в статусе ansible changed=1
-
+ * создан общий плейбук с тегами
+ * создан плейбук из нескольких play
+ * разнесе на отдельные плейбуки
+ * настроен inventory.sh для автоматического заполнения адреса БД в плейбук
+ 
