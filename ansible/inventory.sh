@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--list" ]; then
-    APPIP=`gcloud compute instances list --filter="name=('reddit-app')" | tail -1 | awk '{print $5}'`
-    DBIP=`gcloud compute instances list --filter="name=('reddit-db')" | tail -1 | awk '{print $5}'`
+    APP_IP=`gcloud compute instances list --filter="name=('reddit-app')" | tail -1 | awk '{print $5}'`
+    echo $APP_IP > ../app_ip.log
+    DB_IP=`gcloud compute instances list --filter="name=('reddit-db')" | tail -1 | awk '{print $5}'`
+    DB_INT=`gcloud compute instances list --filter="name=('reddit-db')" | tail -1 | awk '{print $4}'`
+
+    sed -i~ "s/db_host:.*$/db_host:\ $DB_INT/g" "app.yml"
+    rm -f app.yml~
+
     cat << _EOF_
     {
         "_meta": {
             "hostvars": {
                 "appserver": {
-                    "ansible_host": "${APPIP}"
+                    "ansible_host": "${APP_IP}"
                 },
                 "dbserver": {
-                    "ansible_host": "${DBIP}"
+                    "ansible_host": "${DB_IP}"
                 }
             }
         },

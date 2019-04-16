@@ -1,0 +1,12 @@
+---
+- name: Configure hosts & deploy app
+  hosts: all
+  tasks:
+    - name: update mongo config
+      become: true
+      template:
+        src: templates/mongod.conf.j2
+        dest: /etc/mongod.conf
+        mode: 0644
+      tags: db-tag
+
