@@ -8,7 +8,7 @@
         {
             "type": "googlecompute",
             "project_id": "{{user `project_id`}}",
-            "image_name": "reddit-db-base",
+            "image_name": "reddit-db-base-ansible",
             "image_family": "{{user `image_family`}}",
             "source_image_family": "ubuntu-1604-lts",
             "disk_size" : 10,
@@ -23,9 +23,8 @@
 	],
     "provisioners": [
 	{
-	    "type": "shell",
-	    "script": "scripts/install_mongodb.sh",
-	    "execute_command": "sudo {{.Path}}"
+	    "type": "ansible",
+            "playbook_file": "ansible/packer_db.yml"
 	}
     ]
 }

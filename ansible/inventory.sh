@@ -2,6 +2,7 @@
 
 if [ "$1" = "--list" ]; then
     APP_IP=`gcloud compute instances list --filter="name=('reddit-app')" | tail -1 | awk '{print $5}'`
+    echo $APP_IP > ../app_ip.log
     DB_IP=`gcloud compute instances list --filter="name=('reddit-db')" | tail -1 | awk '{print $5}'`
     DB_INT=`gcloud compute instances list --filter="name=('reddit-db')" | tail -1 | awk '{print $4}'`
 
