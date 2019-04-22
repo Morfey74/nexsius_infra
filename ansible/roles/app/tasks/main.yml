@@ -1,5 +1,9 @@
 ---
 # tasks file for app  tasks:
+- name: Show env 
+  debug:
+    msg: "This host is {{ env }}!!!"
+
 - name: Add unit file for Puma
   copy:
     src: puma.service

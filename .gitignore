@@ -1,3 +1,4 @@
+jdauphant.nginx
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
