@@ -6,8 +6,7 @@ language: bash
 #  - master
 #  - PR
 before_install:
-- packer validate -var-file=$TRAVIS_BUILD_DIR/packer/variables.json.example $TRAVIS_BUILD_DIR/packer/app.json
-#- curl https://raw.githubusercontent.com/express42/otus-homeworks/2019-02/run.sh| bash
+- curl https://raw.githubusercontent.com/express42/otus-homeworks/2019-02/run.sh| bash
 #script: travis.sh
 notifications:
   slack:
