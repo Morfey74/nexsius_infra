@@ -1,0 +1,8 @@
+- terraform:
+    project_path: 'terraform/prod'
+    state: "{{ state }}"
+    force_init: true
+    backend_config:
+      region: "eu-west-1"
+      bucket: "some-bucket"
+      key: "random.tfstate"

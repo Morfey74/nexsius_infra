@@ -1,3 +1,6 @@
+*.md.gitbkp
+vault.key
+jdauphant.nginx
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
