@@ -1,6 +1,6 @@
 ---
 # tasks file for db  tasks:
-- name: Show env 
+- name: Show env
   debug:
     msg: "This host is {{ env }}!!!"
 
