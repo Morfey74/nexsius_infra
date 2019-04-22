@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# destination of the final changelog file
+OUTPUT_FILE=README.md
+
+BRANCH=`git branch | grep \* | cut -d ' ' -f2`
+sed -i.gitbkp "s/branch=.*)]/branch=${BRANCH})]/g" $OUTPUT_FILE
+res=$(git status --porcelain | grep $OUTPUT_FILE | wc -l)
+if [ "$res" -gt 0 ]; then
+  git add $OUTPUT_FILE
+  git commit --amend
+  echo "Update badge for branch ${BRANCH} in README.md"
+fi

@@ -1,0 +1,21 @@
+- name: deploy app
+  hosts: app
+  #tags: deploy-tag
+  vars:
+    deploy_user: appuser
+  tasks:
+    - name: fetch application from github
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/{{ deploy_user  }}/reddit
+        version: monolith
+      notify: restart puma
+
+    - name: bundle install
+      bundler:
+        state: present
+        chdir: /home/{{ deploy_user }}/reddit
+  handlers:
+  - name: restart puma
+    become: true
+    systemd: name=puma state=restarted
