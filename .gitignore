@@ -1,5 +1,5 @@
 # Vagrant & molecule
-testenv
+testenv/
 .vagrant/
 *.log
 *.pyc
