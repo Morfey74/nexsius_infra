@@ -2,7 +2,7 @@
   hosts: app
   become: true
   vars:
-   db_host: 10.132.0.23
+   db_host: 10.10.10.10
   roles:
    - app
    - jdauphant.nginx

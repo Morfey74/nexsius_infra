@@ -1,3 +1,11 @@
+# Vagrant & molecule
+testenv/
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache
 *.md.gitbkp
 vault.key
 jdauphant.nginx
@@ -7,3 +15,4 @@ jdauphant.nginx
 *.tfvars
 .terraform/
 *.retry
+
